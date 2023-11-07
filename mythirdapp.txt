@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="176dp"
+        android:ems="10"
+        android:padding="15dp"
+        android:hint="Enter a Number"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:inputType="number"
+        android:textColor="@color/black"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="294dp"
+        android:text="C->F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="F->C"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+package com.example.mythirdapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Button; // For Java
+import android.widget.Toast;
+// For Java
+
+
+public class MainActivity extends AppCompatActivity {
+EditText e;
+Button b1,b2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        e=findViewById(R.id.editTextNumber);
+        b1=findViewById(R.id.button);
+        b2=findViewById(R.id.button2);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                double p=Double.parseDouble(e.getText().toString());
+                double k=((1.8*p) + 32);
+                e.setText(String.format("%2f",k));
+                Toast.makeText(MainActivity.this, String.format("%2f",k)+" F", Toast.LENGTH_SHORT).show();
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                double p1=Double.parseDouble(e.getText().toString());
+                double k1=((p1-32)*5)/9;
+                e.setText(String.format("%f",k1));
+                Toast.makeText(MainActivity.this, String.format("%2f",k1)+" C", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
